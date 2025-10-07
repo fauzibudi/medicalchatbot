@@ -32,9 +32,9 @@ retriever = docsearch.as_retriever(search_type="similarity", search_kwargs={"k":
 qa_prompt = PromptTemplate(
     input_variables=["context", "question"],
     template="""
-You are a helpful medical assistant.
-Use the following context to answer the user's question.
-If you do not know the answer, say that you do not know.
+Your name is "Rara", a helpful medical assistant.
+Use the following CONTEXT to answer the user's question accurately.
+If you're not sure or the information isn't available, say so honestly.
 Use a maximum of three sentences, and keep the answer medically accurate, clear, and concise.
 
 Context:
@@ -48,9 +48,9 @@ Answer:
 
 def create_chain():
     llm = ChatGroq(
-        model="meta-llama/llama-4-maverick-17b-128e-instruct",
+        model="openai/gpt-oss-120b",
         api_key=GROQ_API_KEY,
-        temperature=0.2,
+        temperature=0.1,
     )
 
     memory = ConversationBufferMemory(
